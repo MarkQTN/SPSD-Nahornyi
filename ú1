@@ -1,0 +1,61 @@
+playlist = [
+    ("Taylor Swift", "The Fate of Ophelia", 4.2),
+    ("Taylor Swift", "Opalite", 3.9),
+    ("HUNTR/X & EJAE & AUDREY NUNA & REI AMI", "Golden", 3.5),
+    ("RAYE", "Where Is My Husband!", 3.7),
+    ("Olivia Dean", "Man I Need", 3.3),
+    ("Olivia Dean", "So Easy (To Fall In Love)", 3.4),
+    ("Dave & Tems", "Raindance", 4.0),
+    ("HUNTR/X & EJAE & AUDREY NUNA & REI AMI", "How It's Done", 3.6),
+    ("ROSÉ & Bruno Mars", "APT.", 3.2),
+    ("Lady Gaga & Bruno Mars", "Die With a Smile", 3.8),
+    ("Lola Young", "Messy", 3.5),
+    ("Benson Boone", "Beautiful Things", 3.7),
+    ("Sabrina Carpenter", "Espresso", 3.3),
+    ("Kendrick Lamar & SZA", "Luther", 4.1),
+    ("Alex Warren", "Ordinary", 3.2),
+    ("HAVEN.", "I Run", 3.6),
+    ("4 Non Blondes", "What’s Up?", 4.5),
+    ("FloyyMenor & Cris MJ", "Gata Only", 3.4),
+    ("ZXKAI & slxughter", "NO BATIDÃO (Slowed)", 3.7),
+    ("CKay feat. Mavo", "BODY (danz)", 3.8),
+    ("Lady Gaga", "The Dead Dance", 3.9),
+    ("Spice feat. Shaggy & Sean Paul", "Go Down Deh", 3.6),
+    ("Nicki Minaj feat. 2 Chainz", "Beez In The Trap", 3.4),
+    ("Bizarrap & Daddy Yankee", "Bzrp Music Sessions, Vol. 0/66", 3.1),
+    ("Olivia Dean", "MAN I NEED (RUS)", 3.3),
+    ("HAVEN.", "I Run (Alt)", 3.6),
+    ("Icegergert & Zivert", "БАНК", 3.5),
+    ("ROSALÍA & Björk & Yves Tumor", "Berghain", 4.0),
+    ("Kehlani", "Folded", 3.4),
+    ("STINCT", "YAMADY", 3.5),
+    ("Ayra Starr & Rema", "Who’s Dat Girl", 3.2),
+    ("Okwanda & Sir Trill feat. Weirdo2265 & Bongi SA", "Phatha‑Phatha", 3.7),
+    ("Ravyn Lenae", "Love Me Not", 3.8),
+    ("Ed Sheeran", "Sapphire", 4.1),
+    ("Ice Prince feat. Brymo", "Oleku", 3.6),
+    ("Dean Lewis", "Memories", 4.2),
+    ("Franglish & KeBlack", "Всё что я хочу", 3.5),
+    ("Masego", "Unhinged", 3.7),
+    ("brux XTN", "Paid to Exist", 3.4),
+    ("Xploitcomedy", "Soft life is calling (ise !)", 3.5),
+    ("Taylor Swift", "Opalite (alt mix)", 3.9),
+    ("Lana Del Rey", "Cinnamon Girl", 4.0),
+    ("Gotye feat. Kimbra", "Somebody That I Used to Know", 4.0),
+    ("Billie Eilish", "BIRDS OF A FEATHER", 3.3),
+    ("hypothetical remix", "MOVE BETTER (AI REMIX)", 3.2),
+    ("Tyla", "Water", 3.4),
+    ("Calvin Harris & Rihanna", "We Found Love", 3.8),
+    ("Sam Deep & Nia Pearl & Boohle", "Shela", 3.5),
+    ("Cali Swag District", "Teach Me How to Dougie", 3.6),
+    ("hypothetical", "Harder Than Ever", 3.7)
+]
+
+playlist.append(("Imagine Dragons", "Believer (Live Mix)", 4.0))
+
+playlist.pop(0)
+
+print("Délka playlistu:", len(playlist))
+
+from pprint import pprint
+pprint(playlist)
