@@ -1,0 +1,52 @@
+buses = [
+    ("SOR", "SOR NB 12", 2008),
+    ("SOR", "SOR NB 18", 2009),
+    ("SOR", "SOR CN 10.5", 2004),
+    ("IVECO", "Iveco Urbanway 12M", 2013),
+    ("IVECO", "Iveco Crossway LE 12", 2006),
+    ("Solaris", "Solaris Urbino 12 (IV gen)", 2014),
+    ("Solaris", "Solaris Urbino 18 (IV gen)", 2014),
+    ("MAN", "MAN Lion’s City A21", 1996),
+    ("Mercedes-Benz", "Citaro C2", 2011),
+    ("Mercedes-Benz", "Citaro G", 1997),
+    ("Karosa", "Karosa B 951", 2002),
+    ("Karosa", "Karosa B 961E", 2002),
+    ("Škoda / Solaris", "Škoda 26Tr Solaris", 2010),
+    ("SOR", "SOR EBN 10.5", 2010),
+    ("IVECO", "Iveco E-Way 12 Electric", 2019),
+    ("Solaris", "Solaris Urbino 12 Electric", 2013),
+    ("Solaris", "Solaris Urbino 18 Hybrid", 2010),
+    ("MAN", "MAN Lion’s City 12 E", 2020),
+    ("Mercedes-Benz", "Citaro Hybrid", 2017),
+    ("Solaris", "Solaris Urbino 15", 1999),
+    ("SOR", "SOR CN 12 City", 2004),
+    ("Karosa", "Karosa B 731", 1982),
+    ("Mercedes-Benz", "Conecto G", 1999),
+    ("IVECO", "Iveco Crossway LE 10.8", 2006),
+    ("Solaris", "Solaris Trollino 24", 2019),
+    ("MAN", "MAN Lion’s City 18 G", 2004),
+    ("SOR", "SOR BN 8.5", 2008),
+    ("Solaris", "Solaris Urbino 9 LE", 2020),
+    ("IVECO", "Iveco Urbanway 18M", 2013),
+    ("Mercedes-Benz", "Citaro C2-G", 2011),
+    ("Solaris", "Solaris Urbino 12 Hybrid", 2010),
+    ("MAN", "MAN A23", 1998),
+    ("Karosa", "Karosa B 932", 1996),
+    ("SOR", "SOR NBH 18", 2013),
+    ("Solaris", "Solaris Trollino 18", 2002),
+    ("Mercedes-Benz", "Conecto LF", 1999),
+    ("IVECO", "Iveco E-Way 18 Electric", 2019),
+    ("Solaris", "Solaris Urbino 18 Electric", 2017),
+    ("MAN", "MAN Lion’s City 12 CNG", 2018),
+    ("SOR", "SOR CN 12 CNG", 2009),
+    ("Solaris", "Solaris Urbino 12 CNG", 2014),
+]
+
+buses.append(("Volvo", "Volvo 7900 Electric", 2012))
+
+buses.pop(0)
+
+print("Délka seznamu autobusů:", len(buses))
+
+from pprint import pprint
+pprint(buses)
