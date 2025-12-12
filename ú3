@@ -1,0 +1,109 @@
+import random
+from ColabTurtle.Turtle import *
+
+# Function to draw a single arm of the snowflake (recursive for fractal effect)
+def draw_snowflake_arm(length, level):
+    if level == 0:
+        forward(length)
+    else:
+        length /= 3
+        draw_snowflake_arm(length, level - 1)
+        left(60)
+        draw_snowflake_arm(length, level - 1)
+        right(120)
+        draw_snowflake_arm(length, level - 1)
+        left(60)
+        draw_snowflake_arm(length, level - 1)
+
+# Function to draw the entire snowflake
+def snowflake_drawing_logic(size=100, branches=6, level=3, color_choice='blue'):
+    # Set pen properties for the snowflake
+    pencolor(color_choice)
+    width(2)
+    hideturtle()
+
+    penup()
+    # Move to starting position for the snowflake (centered)
+    goto(window_width() / 2, window_height() / 2)
+    # Adjust starting position and angle for a centered snowflake
+    backward(size / 2) # Move back slightly to center the base of the snowflake
+    right(90) # Orient for drawing upwards
+    forward(size / (2 * 1.732)) # Adjust for height of the snowflake (approximate equilateral triangle height)
+    left(90) # Return to original orientation
+    pendown()
+
+    # Draw each branch of the snowflake
+    for _ in range(branches):
+        draw_snowflake_arm(size, level)
+        backward(size) # Return to center after drawing an arm
+        left(360 / branches)
+
+# Function to draw a single dot
+def draw_dot(x, y, size=5, dot_color=None):
+    if dot_color is None:
+        dot_color = random.choice([(255,255,255), (150,150,255), (200,200,200)]) # White, light blue, grey
+    penup()
+    goto(x, y)
+    pendown()
+    color(dot_color)
+    width(size)
+    forward(1) # Draw a small dot by moving forward 1 unit
+    penup()
+
+# Function to draw a single star outline
+def draw_star(x, y, size=15, star_color='gold'):
+    penup()
+    goto(x, y)
+    setheading(random.randint(0, 359)) # Random orientation for each star
+    pendown()
+    color(star_color)
+    width(2)
+    for _ in range(5):
+        forward(size)
+        right(144)
+    penup()
+
+# --- Main drawing execution ---
+
+# Initialize the turtle screen with a larger window for scattering elements
+initializeTurtle(initial_speed=13, initial_window_size=(800, 600))
+clear() # Clear any previous drawings
+bgcolor('midnightblue') # Set a dark background for contrast
+hideturtle() # Hide the drawing turtle
+
+# Draw the snowflake
+snowflake_size = 200
+snowflake_drawing_logic(size=snowflake_size, branches=6, level=4, color_choice='cyan')
+
+# Define the central area occupied by the snowflake to avoid placing random elements directly on it
+snowflake_center_x = window_width() / 2
+snowflake_center_y = window_height() / 2
+snowflake_clearance_radius = snowflake_size * 0.7 # Adjust as needed
+
+# Draw scattered dots around the snowflake
+num_dots = 150
+dot_colors = [(255,255,255), (150,150,255), (200,200,200), (100,200,255), (255, 255, 255)]
+for _ in range(num_dots):
+    while True:
+        x = random.randint(20, window_width() - 20)
+        y = random.randint(20, window_height() - 20)
+        # Ensure dots are sufficiently far from the snowflake center
+        if (x - snowflake_center_x)**2 + (y - snowflake_center_y)**2 > snowflake_clearance_radius**2:
+            draw_dot(x, y, size=random.randint(2, 6), dot_color=random.choice(dot_colors))
+            break
+
+# Draw scattered stars around the snowflake
+num_stars = 25
+star_colors = ['gold', 'silver', 'white', 'lightyellow']
+for _ in range(num_stars):
+    while True:
+        x = random.randint(30, window_width() - 30)
+        y = random.randint(30, window_height() - 30)
+        # Ensure stars are sufficiently far from the snowflake center
+        if (x - snowflake_center_x)**2 + (y - snowflake_center_y)**2 > snowflake_clearance_radius**2:
+            draw_star(x, y, size=random.randint(10, 20), star_color=random.choice(star_colors))
+            break
+
+# Bring turtle back to home position and face right (optional)
+home()
+setheading(0)
