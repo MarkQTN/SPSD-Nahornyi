@@ -1,0 +1,127 @@
+import tkinter as tk
+from tkinter import ttk, messagebox
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo, available_timezones
+
+# --- Barvy a Styly ---
+COLOR_BG = "#f0f4f7"        # Světlé pozadí
+COLOR_PRIMARY = "#2c3e50"   # Tmavě modrá pro texty
+COLOR_ACCENT = "#3498db"    # Jasně modrá pro tlačítko
+COLOR_RESULT_BG = "#ffffff" # Bílá pro výsledek
+
+def calculate_difference():
+    tz1_name = combo_tz1.get()
+    tz2_name = combo_tz2.get()
+
+    if not tz1_name or not tz2_name:
+        messagebox.showwarning("Upozornění", "Vyberte prosím obě časová pásma.")
+        return
+
+    try:
+        now_utc = datetime.now(timezone.utc)
+        time1 = now_utc.astimezone(ZoneInfo(tz1_name))
+        time2 = now_utc.astimezone(ZoneInfo(tz2_name))
+
+        offset1 = time1.utcoffset().total_seconds()
+        offset2 = time2.utcoffset().total_seconds()
+        diff_hours = (offset1 - offset2) / 3600
+
+        # Formátování času
+        t1_str = time1.strftime('%H:%M:%S')
+        d1_str = time1.strftime('%d. %m. %Y')
+        t2_str = time2.strftime('%H:%M:%S')
+        d2_str = time2.strftime('%d. %m. %Y')
+
+        # Sestavení textu výsledku
+        res = f"{tz1_name}:\n{t1_str} ({d1_str})\n\n"
+        res += f"{tz2_name}:\n{t2_str} ({d2_str})\n\n"
+        res += f"Rozdíl: {abs(diff_hours):.1f} h"
+        
+        if diff_hours > 0:
+            res += f"\n({tz1_name} je napřed)"
+        elif diff_hours < 0:
+            res += f"\n({tz1_name} je pozadu)"
+        
+        result_label.config(text=res, foreground=COLOR_PRIMARY)
+
+    except Exception as e:
+        messagebox.showerror("Chyba", f"Chyba: {e}")
+
+# --- Hlavní okno ---
+root = tk.Tk()
+root.title("TimeDiff Pro")
+root.geometry("400x550")
+root.configure(bg=COLOR_BG)
+
+# Definice stylů pro ttk prvky
+style = ttk.Style()
+style.theme_use('clam') # Modernější téma než default
+
+# Styl pro Combobox
+style.configure("TCombobox", fieldbackground="white", background=COLOR_ACCENT)
+# Styl pro hlavní Label
+style.configure("TLabel", background=COLOR_BG, foreground=COLOR_PRIMARY, font=("Segoe UI", 10))
+# Styl pro titulek
+style.configure("Header.TLabel", font=("Segoe UI", 14, "bold"))
+
+# --- UI Prvky ---
+main_container = tk.Frame(root, bg=COLOR_BG, padx=30, pady=30)
+main_container.pack(fill='both', expand=True)
+
+ttk.Label(main_container, text="Kalkulačka časových pásem", style="Header.TLabel").pack(pady=(0, 20))
+
+# Sekce 1
+ttk.Label(main_container, text="Základní lokace:").pack(anchor="w")
+all_zones = sorted(list(available_timezones()))
+combo_tz1 = ttk.Combobox(main_container, values=all_zones, state="readonly", width=30)
+combo_tz1.pack(pady=(5, 15), ipady=3)
+combo_tz1.set("Europe/Prague")
+
+# Sekce 2
+ttk.Label(main_container, text="Cílová lokace:").pack(anchor="w")
+combo_tz2 = ttk.Combobox(main_container, values=all_zones, state="readonly", width=30)
+combo_tz2.pack(pady=(5, 25), ipady=3)
+combo_tz2.set("America/New_York")
+
+# Stylové tlačítko (používáme standardní Button pro lepší kontrolu barev)
+calc_btn = tk.Button(
+    main_container, 
+    text="VYPOČÍTAT ROZDÍL", 
+    command=calculate_difference,
+    bg=COLOR_ACCENT, 
+    fg="white", 
+    font=("Segoe UI", 10, "bold"),
+    bd=0,
+    padx=20,
+    pady=10,
+    cursor="hand2",
+    activebackground="#2980b9",
+    activeforeground="white"
+)
+calc_btn.pack(fill='x', pady=(0, 25))
+
+# Výsledkový box
+result_frame = tk.LabelFrame(
+    main_container, 
+    text=" Výsledek ", 
+    bg=COLOR_RESULT_BG, 
+    fg=COLOR_PRIMARY,
+    font=("Segoe UI", 9, "italic"),
+    padx=15, 
+    pady=15,
+    relief="flat"
+)
+result_frame.pack(fill='both', expand=True)
+
+result_label = tk.Label(
+    result_frame, 
+    text="Zvolte pásma a klikněte...", 
+    bg=COLOR_RESULT_BG,
+    fg="#7f8c8d",
+    font=("Segoe UI", 11),
+    justify="left"
+)
+result_label.pack()
+
+if __name__ == "__main__":
+    root.mainloop()
