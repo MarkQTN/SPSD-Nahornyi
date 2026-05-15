@@ -1,0 +1,42 @@
+# Nadřazená třída
+class Vozidlo:
+    def __init__(self, znacka, rychlost):
+        self.znacka = znacka # atribut
+        self.rychlost = rychlost # atribut
+
+    def info(self):
+        print(f"Značka: {self.znacka}, rychlost: {self.rychlost} km/h")
+
+
+# Podtřída auta
+class Auto(Vozidlo):
+    def __init__(self, znacka, rychlost, pocet_dveri):
+        super().__init__(znacka, rychlost)
+        self.pocet_dveri = pocet_dveri # atribut
+
+    def info_auto(self):
+        print(f"Auto {self.znacka} má {self.pocet_dveri} dveře.")
+
+
+# Podtřída autobusu
+class Autobus(Vozidlo):
+    def __init__(self, znacka, rychlost, kapacita):
+        super().__init__(znacka, rychlost)
+        self.kapacita = kapacita # atribut
+
+    def info_autobus(self):
+        print(f"Autobus {self.znacka} má kapacitu {self.kapacita} cestujících.")
+
+
+# Vytvoření objektů
+moje_auto = Auto("Škoda", 180, 5)
+muj_autobus = Autobus("Mercedes", 100, 50)
+
+# Výpis informací
+moje_auto.info()
+moje_auto.info_auto()
+
+print()
+
+muj_autobus.info()
+muj_autobus.info_autobus()
